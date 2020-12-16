@@ -20,14 +20,6 @@ window.addEventListener("load", function() {
       return Math.floor(Math.random() * Math.floor(max));
     }
 
-   let formData = {
-      userPilotName: "",
-      userCoPilotName: "",
-      userFuelLevel: 0,
-      userCargoMass: 0,
-   };
-
-
    form.addEventListener("submit", function(event) {
       event.preventDefault();
       let userPilotName = document.querySelector("input[name=pilotName");
@@ -51,21 +43,12 @@ window.addEventListener("load", function() {
          alert("Make sure to enter valid information for each field!");
          return;
       }
-      formData.userPilotName = userPilotName.value;
-      formData.userCoPilotName = userCoPilotName.value;
-      formData.userFuelLevel = userFuelLevel.value;
-      formData.userCargoMass = userCargoMass.value;
-
-      // userPilotName.value = "";
-      // userCoPilotName.value = "";
-      // userFuelLevel.value = "";
-      // userCargoMass.value= "";
+ 
    // Using template literals, update the li elements pilotStatus and copilotStatus to 
    // include the pilot's name and the co-pilot's name.
-      document.getElementById("pilotStatus").innerHTML = `Pilot ${formData.userPilotName} is ready for launch.`;    
-      document.getElementById("copilotStatus").innerHTML = `Co-Pilot ${formData.userCoPilotName} is ready for launch.`;  
+      document.getElementById("pilotStatus").innerHTML = `Pilot ${userPilotName.value} is ready for launch.`;    
+      document.getElementById("copilotStatus").innerHTML = `Co-Pilot ${userCoPilotName.value} is ready for launch.`;  
        
-   
    // If the user submits a fuel level that is too low (less than 10,000 liters), 
    // change faultyItems to visible with an updated fuel status stating that there 
    // is not enough fuel for the journey. The text of the h2 element, launchStatus, 
@@ -75,7 +58,7 @@ window.addEventListener("load", function() {
       let faultyItemsElement = document.getElementById("faultyItems");
       faultyItemsElement.style.visibility = "visible";
 
-      if (formData.userFuelLevel < 10000) {
+      if (userFuelLevel.value < 10000) {
          fuelStatusElement.innerHTML = `Fuel Level too low for launch.`;
          launchStatusElement.innerHTML = `Shuttle not ready for launch.`;
          launchStatusElement.style.color = "red";
@@ -88,7 +71,7 @@ window.addEventListener("load", function() {
    // much mass for the shuttle to take off. The text of launchStatus should also change to 
    // "Shuttle not ready for launch" and the color should change to red.
       let cargoStatusElement = document.getElementById("cargoStatus");
-      if (formData.userCargoMass > 10000) {
+      if (userCargoMass.value > 10000) {
          cargoStatusElement.innerHTML = `Cargo mass too high for launch.`;
          launchStatusElement.innerHTML = `Shuttle not ready for launch.`;
          launchStatusElement.style.color = "red";
@@ -98,7 +81,7 @@ window.addEventListener("load", function() {
 
    // If the shuttle is ready to launch, change the text of launchStatus to 
    // green and display "Shuttle is ready for launch".
-      if (formData.userFuelLevel >= 10000 && formData.userCargoMass <= 10000) {
+      if (userFuelLevel.value >= 10000 && userCargoMass.value <= 10000) {
          launchStatusElement.innerHTML = `Shuttle is ready for launch.`;
          launchStatusElement.style.color = 'green';
       } 
