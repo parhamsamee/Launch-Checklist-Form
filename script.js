@@ -56,10 +56,10 @@ window.addEventListener("load", function() {
       formData.userFuelLevel = userFuelLevel.value;
       formData.userCargoMass = userCargoMass.value;
 
-      userPilotName.value = "";
-      userCoPilotName.value = "";
-      userFuelLevel.value = "";
-      userCargoMass.value= "";
+      // userPilotName.value = "";
+      // userCoPilotName.value = "";
+      // userFuelLevel.value = "";
+      // userCargoMass.value= "";
    // Using template literals, update the li elements pilotStatus and copilotStatus to 
    // include the pilot's name and the co-pilot's name.
       document.getElementById("pilotStatus").innerHTML = `Pilot ${formData.userPilotName} is ready for launch.`;    
