@@ -16,6 +16,10 @@
 window.addEventListener("load", function() {
    let form = document.querySelector("form");
 
+   function getRandomInt(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
    let formData = {
       userPilotName: "",
       userCoPilotName: "",
@@ -38,12 +42,12 @@ window.addEventListener("load", function() {
             return;
       } 
       // if pilot and copilot is not a number (NaN), then error
-      if (!isNaN(userPilotName.value) && !isNaN(userCoPilotName.value)) {
+      if (!isNaN(userPilotName.value) || !isNaN(userCoPilotName.value)) {
          alert("Make sure to enter valid information for each field!");
          return;
       }
       // if fuelLevel and cargoMass is a number, then error
-      if (isNaN(userFuelLevel.value) && isNaN(userCargoMass.value)) {
+      if (isNaN(userFuelLevel.value) || isNaN(userCargoMass.value)) {
          alert("Make sure to enter valid information for each field!");
          return;
       }
@@ -75,6 +79,8 @@ window.addEventListener("load", function() {
          fuelStatusElement.innerHTML = `Fuel Level too low for launch.`;
          launchStatusElement.innerHTML = `Shuttle not ready for launch.`;
          launchStatusElement.style.color = "red";
+      } else {
+         fuelStatusElement.innerHTML = `Fuel Level high enough for launch.`;
       }
 
    // If the user submits a cargo mass that is too large (more than 10,000 kilograms), 
@@ -86,6 +92,8 @@ window.addEventListener("load", function() {
          cargoStatusElement.innerHTML = `Cargo mass too high for launch.`;
          launchStatusElement.innerHTML = `Shuttle not ready for launch.`;
          launchStatusElement.style.color = "red";
+      } else {
+         cargoStatusElement.innerHTML = `Cargo mass low enough for launch.`;
       }
 
    // If the shuttle is ready to launch, change the text of launchStatus to 
@@ -98,7 +106,8 @@ window.addEventListener("load", function() {
       let missionTarget = document.getElementById('missionTarget');
       fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
          response.json().then(data => {
-            let planet = data[0];
+            let index = getRandomInt(data.length - 1);
+            let planet = data[index];
             missionTarget.innerHTML = `<h2>Mission Destination</h2>
                <ol>
                   <li>Name: ${planet.name}</li>
